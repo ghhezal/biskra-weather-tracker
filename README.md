@@ -1,50 +1,41 @@
-# 🌤️ Biskra Weather Tracker
+# Biskra Weather Tracker
 
-A lightweight Python script that pulls the past 7 days of real weather data for Biskra, Algeria from the [Open-Meteo](https://open-meteo.com/) free API, processes it with pandas, and produces a temperature trend chart and a CSV export — no API key required.
+I built this to get comfortable with APIs, pandas, and matplotlib all in one small project. It pulls the last 7 days of real temperature data for Biskra from Open-Meteo (free, no API key), crunches the numbers, and spits out a chart and a CSV. Nothing fancy — just a clean script that does one thing well.
 
 ---
 
-## 📸 Output Preview
+## What it does
 
-Running the script generates two files inside `data/`:
+- Hits the Open-Meteo API for daily max/min temps over the past week
+- Calculates the daily average (midpoint between high and low)
+- Plots all three as a line chart and saves it as a PNG
+- Also saves the raw numbers to a CSV
+- Creates the `data/` output folder automatically if it's not there
 
-| File | Description |
+---
+
+## Output
+
+After running, you'll find two files in `data/`:
+
+| File | What's in it |
 |---|---|
-| `weather_chart.png` | Line chart of max, min, and average temperatures |
-| `biskra_weather.csv` | Raw daily temperature records |
+| `weather_chart.png` | 7-day temperature trend (max, min, average) |
+| `biskra_weather.csv` | The raw daily data behind the chart |
 
 ---
 
-## ✨ Features
+## Setup
 
-- Fetches live daily max/min temperature data (no API key needed)
-- Computes daily average as the midpoint between the high and low
-- Plots a clean 7-day temperature trend with color-coded lines
-- Exports both the chart (PNG) and the data (CSV) automatically
-- Creates the `data/` output folder if it doesn't exist yet
+Clone the repo and step into it:
 
----
-
-## 🛠️ Tech Stack
-
-| Library | Purpose |
-|---|---|
-| `requests` | HTTP calls to the Open-Meteo API |
-| `pandas` | Data loading and transformation |
-| `matplotlib` | Chart generation |
-| `datetime` | Dynamic date range calculation |
-
----
-
-## ⚙️ Setup
-
-### 1. Clone the repo
 ```bash
 git clone https://github.com/your-username/biskra-weather-tracker.git
 cd biskra-weather-tracker
 ```
 
-### 2. Create and activate a virtual environment
+Create a virtual environment and activate it:
+
 ```bash
 python -m venv .venv
 
@@ -55,53 +46,39 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Install dependencies
+Install the dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## ▶️ Usage
+## Run it
 
 ```bash
 python weather_tracker.py
 ```
 
-**Expected output in the terminal:**
+You should see something like:
+
 ```
 Average temperature: 28.4°C
 Files saved in 'data' folder
 ```
 
-The `data/` folder will contain your chart and CSV after the first run.
-
 ---
 
-## 📁 Project Structure
+## Want to track a different city?
 
-```
-biskra-weather-tracker/
-├── weather_tracker.py   # Main script
-├── requirements.txt     # Python dependencies
-├── .gitignore           # Files excluded from version control
-├── data/
-│   └── .gitkeep         # Keeps the folder tracked by Git (outputs are ignored)
-└── README.md
-```
-
----
-
-## 🌍 Changing the Location
-
-The coordinates are set near the top of `weather_tracker.py`:
+Two lines to change at the top of `weather_tracker.py`:
 
 ```python
 latitude = 34.8503
 longitude = 5.7281
 ```
 
-Replace them with any coordinates you like. You can find coordinates for any city on [latlong.net](https://www.latlong.net/). Remember to update the chart title on this line too:
+Swap in any coordinates you want — [latlong.net](https://www.latlong.net/) is handy for that. Then update the chart title a bit further down so it matches:
 
 ```python
 plt.title('Biskra Weather - Past Week')
@@ -109,10 +86,22 @@ plt.title('Biskra Weather - Past Week')
 
 ---
 
-## 📄 License
+## Project layout
 
-This project is open source under the [MIT License](LICENSE).
+```
+biskra-weather-tracker/
+├── weather_tracker.py   # the whole script
+├── requirements.txt
+├── .gitignore
+├── data/
+│   └── .gitkeep         # keeps the folder in git; actual output files are ignored
+└── README.md
+```
 
 ---
 
-> Built with Python · Data from [Open-Meteo](https://open-meteo.com/) (free, no API key required)
+## Stack
+
+`requests` · `pandas` · `matplotlib` · `datetime`
+
+Weather data from [Open-Meteo](https://open-meteo.com/) — free and open, no account needed.
