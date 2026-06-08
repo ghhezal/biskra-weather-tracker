@@ -23,3 +23,14 @@ url = (
 
 response = requests.get(url)
 data = response.json()
+
+# --- Data Processing ---
+# Load daily temperature records into a DataFrame
+df = pd.DataFrame({
+    'date': pd.to_datetime(data['daily']['time']),
+    'max_temp': data['daily']['temperature_2m_max'],
+    'min_temp': data['daily']['temperature_2m_min']
+})
+
+# Compute daily average as the midpoint between recorded high and low
+df['avg_temp'] = (df['max_temp'] + df['min_temp']) / 2
