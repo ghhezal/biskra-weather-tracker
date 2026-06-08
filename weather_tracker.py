@@ -34,3 +34,27 @@ df = pd.DataFrame({
 
 # Compute daily average as the midpoint between recorded high and low
 df['avg_temp'] = (df['max_temp'] + df['min_temp']) / 2
+
+# --- Visualization ---
+plt.figure(figsize=(10, 6))
+plt.plot(df['date'], df['max_temp'], 'r-o', label='Max')
+plt.plot(df['date'], df['min_temp'], 'b-o', label='Min')
+plt.plot(df['date'], df['avg_temp'], 'g--', label='Average')
+plt.xlabel('Date')
+plt.ylabel('Temperature (°C)')
+plt.title('Biskra Weather - Past Week')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# --- Export ---
+# Persist chart and raw data under data/, creating the folder if needed
+if not os.path.exists('data'):
+    os.makedirs('data')
+
+plt.savefig('data/weather_chart.png')
+df.to_csv('data/biskra_weather.csv', index=False)
+
+print(f"Average temperature: {df['avg_temp'].mean():.1f}°C")
+print("Files saved in 'data' folder")
