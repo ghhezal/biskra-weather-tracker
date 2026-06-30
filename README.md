@@ -105,3 +105,7 @@ biskra-weather-tracker/
 `requests` · `pandas` · `matplotlib` · `datetime`
 
 Weather data from [Open-Meteo](https://open-meteo.com/) — free and open, no account needed.
+
+## Author
+
+**Amine Ghezal**
